@@ -105,7 +105,7 @@ const TaskForm = ({
         setIsLoading(true);
         try {
           const apiResponse = await fetch(
-            "http://localhost:3000/api/employees"
+            `${process.env.FRONTEND_URL}/api/employees`
           );
           if (apiResponse.ok) {
             console.log("apiResponse", apiResponse);
@@ -190,7 +190,7 @@ const TaskForm = ({
 
       let apiResponse;
       if (task) {
-        apiResponse = await fetch(`http://localhost:3000/api/task`, {
+        apiResponse = await fetch(`${process.env.FRONTEND_URL}/api/task`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -198,7 +198,7 @@ const TaskForm = ({
           body: JSON.stringify(taskData),
         });
       } else {
-        apiResponse = await fetch("http://localhost:3000/api/task", {
+        apiResponse = await fetch(`${process.env.FRONTEND_URL}/api/task`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

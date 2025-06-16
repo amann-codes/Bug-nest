@@ -82,7 +82,7 @@ const TasksList = ({
 
     setIsDeleting(true);
     try {
-      const apiResponse = await fetch(`http://localhost:3000/api/task?id=${taskToDelete}`, {
+      const apiResponse = await fetch(`${process.env.FRONTEND_URL}/api/task?id=${taskToDelete}`, {
         method: "DELETE",
       });
       const result = await apiResponse.json();

@@ -60,7 +60,7 @@ const EmployeesList = ({ employees = [], onAddEmployee }: EmployeesListProps) =>
       for (const employee of employees) {
         try {
           const apiResponse = await fetch(
-            `http://localhost:3000/api/task?employeeId=${employee.id}`
+            `${process.env.FRONTEND_URL}/api/task?employeeId=${employee.id}`
           );
           const response = await apiResponse.json();
 

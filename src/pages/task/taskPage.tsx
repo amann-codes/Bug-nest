@@ -54,10 +54,10 @@ export default function TasksPage() {
       setError(null);
 
       try {
-        const promises = [fetch("http://localhost:3000/api/task")];
+        const promises = [fetch(`${process.env.FRONTEND_URL}/api/task`)];
         // Only fetch employees if user is a manager - using the state value
         if (isManager) {
-          promises.push(fetch("http://localhost:3000/api/team/get-employee"));
+          promises.push(fetch(`${process.env.FRONTEND_URL}/api/team/get-employee`));
         }
 
         const responses = await Promise.all(promises);

@@ -101,7 +101,7 @@ export async function sendInvitationEmail(
   role: string
 ): Promise<void> {
   const baseUrl =
-    process.env.NEXT_PUBLIC_FRONTEND_URL || "http://localhost:3000";
+    process.env.FRONTEND_URL ;
   const invitationLink = `${baseUrl}/register?token=${token}`;
   const roleText = role === "manager" ? "Manager" : "Employee";
 

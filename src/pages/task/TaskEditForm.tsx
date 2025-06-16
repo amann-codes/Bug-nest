@@ -88,7 +88,7 @@ const TaskEditForm = ({
       if (canEditAllFields && initialEmployees.length === 0) {
         setIsLoading(true);
         try {
-          const response = await fetch("http://localhost:3000/api/team/get-employee");
+          const response = await fetch(`${process.env.FRONTEND_URL}/api/team/get-employee`);
           const data = await response.json();
           if (response.status === 200 && data.employees) {
             setEmployees(data.employees);
@@ -117,7 +117,7 @@ const TaskEditForm = ({
         assignedEmployeeIds: data.assigneeIds,
       };
 
-      const response = await fetch(`http://localhost:3000/api/task`, { 
+      const response = await fetch(`${process.env.FRONTEND_URL}/api/task`, { 
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -19,7 +19,7 @@ export default function EmployeesPage() {
       setIsLoading(true);
       try {
         const response = await fetch(
-          "http://localhost:3000/api/team/get-employee"
+          `${process.env.FRONTEND_URL}/api/team/get-employee`
         );
         const data = await response.json();
         setEmployees(data.employees || []);

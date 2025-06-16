@@ -68,7 +68,7 @@ export default function TokenRegistration() {
 
       try {
         const response = await fetch(
-          `http://localhost:3000/api/team/employee-invite?token=${token}`
+          `${process.env.FRONTEND_URL}/api/team/employee-invite?token=${token}`
         );
         const data = await response.json();
 
@@ -175,7 +175,7 @@ export default function TokenRegistration() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3000/api/team/registeration", {
+      const response = await fetch(`${process.env.FRONTEND_URL}/api/team/registeration`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
