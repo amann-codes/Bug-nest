@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String     @id @default(cuid())
+  name          String?
+  password      String?
+  email         String     @unique
+  emailVerified DateTime?
+  image         String?
+  role          String     @default("Admin")
+  employees     Employee[]
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
+model InvitationToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  email     String
+  name      String?
+  role      String
+  userId    String
+  managerId String?
+  expiry    DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Employee {
+  id        String @id @default(cuid())
+  name      String
+  email     String @unique
+  password  String
+  role      String
+  userId    String
+  user      User   @relation(fields: [userId], references: [id])
+  managerId String
+
+  createdTasks Task[]   @relation("CreatedTasks")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Task {
+  id                  String    @id @default(cuid())
+  title               String
+  description         String?
+  status              String    @default("pending")
+  priority            String    @default("medium")
+  dueDate             DateTime?
+  managerId           String
+  manager             Employee  @relation("CreatedTasks", fields: [managerId], references: [id])
+  assignedEmployeeIds String[]
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+}
